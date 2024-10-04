@@ -1,0 +1,58 @@
+/*Body Parser npm package*/
+npm i body-parser
+
+body-parser is a middleware package in Node.js used to handle incoming request data (i.e., the body of a request) in a more manageable way. When working with a Node.js app, especially one built using the Express framework, you'll often need to deal with data sent from a client (like form data or JSON).
+By default, Node.js doesn't automatically parse the body of incoming HTTP requests. This means that when a client sends data in the body (e.g., in a POST or PUT request), the data comes as a raw stream of bytes, which isn't easy to work with directly. body-parser helps by converting that raw data into a format you can easily use in your app, like JSON or URL-encoded data.
+Imagine a client sends form data or JSON data to your server. Without body-parser, you'd have to manually process and extract that data. body-parser simplifies this by parsing the body and attaching it to req.body, allowing you to access the data directly.
+Key Features:
+a. bodyParser.text(): parse all our requests into texts.
+b. bodyParser.json(): This middleware parses incoming JSON payloads. It’s useful when you're sending JSON data in the body, like in many modern APIs.
+c. bodyParser.urlencoded({ extended: true }): This middleware parses URL-encoded form data, like data from HTML forms (where the content type is application/x-www-form-urlencoded). The extended: true option allows you to handle more complex objects in your URL-encoded data (nested objects).
+
+    Example: Sending JSON Data -
+    app.post('/api/data', (req, res) => {
+        console.log(req.body); // If sent as JSON, it might log: { "name": "Alice", "age": 25 }
+        res.send('Data received!');
+   });
+
+   Example: Sending Form Data -
+   <form action="/submit" method="POST">
+     <input type="text" name="name">
+     <input type="number" name="age">
+     <button type="submit">Submit</button>
+   </form>
+   The form data will be parsed by body-parser and made available in req.body.
+
+
+/*HTTP STtus Codes*/
+
+As a beginner backend developer, it's important to be familiar with the key HTTP status codes to handle different client-server interactions effectively. Here's a list of common HTTP status codes you should know:
+
+1. 1xx Informational Responses
+    100 Continue: The server has received the request headers and the client can proceed to send the request body.
+    101 Switching Protocols: The server is switching protocols as requested by the client.
+2. 2xx Success
+    200 OK: The request was successful, and the server has returned the requested resource.
+    201 Created: The request has been fulfilled and a new resource has been created (commonly used after POST requests).
+    202 Accepted: The request has been received but not yet acted upon (often used for asynchronous processing).
+    204 No Content: The request was successful, but there is no content to send in the response (commonly used in DELETE operations).
+3. 3xx Redirection
+    301 Moved Permanently: The resource requested has been moved to a new URL permanently.
+    302 Found: The resource is temporarily located at a different URL.
+    304 Not Modified: The cached version of the resource is still valid, so no new data is sent.
+4. 4xx Client Errors
+    400 Bad Request: The server cannot process the request due to client error (e.g., malformed request syntax).
+    401 Unauthorized: The client must authenticate itself to get the requested response.
+    403 Forbidden: The client does not have permission to access the requested resource.
+    404 Not Found: The requested resource could not be found on the server.
+    405 Method Not Allowed: The request method (e.g., GET, POST) is not supported by the server for the requested resource.
+    409 Conflict: The request could not be processed because of a conflict with the current state of the resource (e.g., duplicate resource).
+    429 Too Many Requests: The client has sent too many requests in a given amount of time (rate limiting).
+5. 5xx Server Errors
+    500 Internal Server Error: A generic error occurred on the server, and it could not fulfill the request.
+    501 Not Implemented: The server does not recognize the request method or lacks the ability to fulfill the request.
+    502 Bad Gateway: The server received an invalid response from an upstream server.
+    503 Service Unavailable: The server is currently unable to handle the request due to temporary overload or maintenance.
+    504 Gateway Timeout: The server did not receive a timely response from an upstream server.
+    These codes will help you manage responses, debug errors, and improve the user experience by providing appropriate feedback during backend development.
+

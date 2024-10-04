@@ -1,0 +1,104 @@
+//*Creating our First Server with node and express*/
+
+//initialize npm: "npm init" to initialize npm
+//run server:  "node server.js" to run our server.
+
+console.log("hey, my friend");
+
+//install express: npm install express --save
+check - https://expressjs.com to learn how to use Express.js
+//Using nodemon to run server: 
+    Nodemon monitor for changes in your source code and it automatically restart your server when it detects any changes in your code. Nodemon helps saves time and enrgy having to always restart your server using "node index.js"!
+
+install nodemon: npm install -g nodemon
+run nodemon: nodemon server.js - it runs our server.
+
+
+/*Basic Routing*/
+Basic routing - Routing refers to determining how our application responds to a client request to a particular endpoint, which is a URI (or path/location) and a specific HTTP request method (GET, POST, and so on).
+Each route can have one or more handler functions(callbacks), which are executed when the route is matched.
+
+Route definition Structure:
+    "app.METHOD(PATH, HANDLER)"
+Where:
+a. app is an instance of express.
+b. METHOD is an HTTP request method, in lowercase.
+c. PATH is a path/location on the server.
+d. HANDLER is the callback function executed when the route is matched i.e anonymous or arrow function.
+
+
+  E.g  app.get('/', (req, res) => {
+         res.send('Hello World!')
+       })
+  E.g app.post('/', (req, res) => {
+        res.send('Got a POST request')
+       })
+  E.g app.put('/user', (req, res) => {
+        res.send('Got a PUT request at /user')
+      })
+
+  E.g app.delete('/user', (req, res) => {
+        res.send('Got a DELETE request at /user')
+      })
+
+/*Methods */
+A. app.listen()
+    The Listen Method & Local domain
+    The local domain of any browser is "httt://localhost". It s like the home page of our browser
+    Port - A port is a channel that we have tuned our server to e.g 3000, 8080, 5000 etc it tells our Server to listen on a specific port for any HTTP requests that gets sent to our Server from the Browser.
+    app.listen(3000)
+
+    E.g app.listen(3000, function() {
+    console.log(`I am running an anonymous function on port: ${3000}`)
+  })
+B. app.use()
+ It allows our app to use any npm package we are installing.
+
+B. The Http Methods
+    Inorder for our Browser to get intouch with our server on the port 3000 channel we have set, we need to make use of Http verbs. JS Http methods helps our Server to respond to the requests from the Browser.
+    Our Server sends response(html, css, js files) to the Browsers requests.
+    app.get()
+    app.post()
+    app.put()
+    app.delete() etc
+    The app.Methods helps us target a specific route/endpoint in our Browser.
+
+C. Callback function
+    The callback function can either be an anonymous callback function or an arrow callback function.
+    The callback function have two parameters i.e "request" & "response".
+    The callback function tells the server what to do when a request is made from the Browser via a specific route/endpoint.
+    Note - we use the "send" method only to send back a response to the Browser.
+    E.g
+    app.get("", function(request, response){
+        response.send("Hello, how are you!")
+    })
+    E.g 
+    app.get("/", function(request, response) {
+        console.log(request)
+    })
+
+    Note - you can send plain texts/strings, html codes etc as your from the Server to the Browser
+    E.g app.get("/", function(request, response){
+        response.send("<h1>Stone cold</h2>")
+    })
+
+
+/*Serving static files in Express*/
+To serve static files such as images, CSS files, and JavaScript files, use the express.static built-in middleware function in Express.
+
+The function signature is: express.static(root, [options])
+
+The root argument specifies the root directory from which to serve static assets. For more information on the options argument, see "express.static" on the website.
+
+For example, use the following code to serve images, CSS files, and JavaScript files in a directory named public:
+    app.use(express.static('public'))
+    app.use(express.static('files'))
+
+Now, you can load the files that are in the public directory:
+http://localhost:3000/images/kitten.jpg
+http://localhost:3000/css/style.css
+http://localhost:3000/js/app.js
+http://localhost:3000/images/bg.png
+http://localhost:3000/hello.html
+
+
