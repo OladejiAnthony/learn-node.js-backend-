@@ -1,0 +1,112 @@
+/*Understanding JSON*/
+//JS object
+var wardrobe = {
+    door: 2,
+    drawers: 2,
+    color: "red"
+}
+
+//Convert to JSON (external api)
+var jsonwardrobe =  JSon.stringify(wardrobe)  --->  {"door":2, "drawers":2, "colors":"red"} 
+
+//Convert back to JS Object inside your codebase
+var jsonwardrobe =  JSon.parse(wardrobe)
+
+
+//WORKING WITH PARAMETERS IN NODE.JS API's:
+To work with parameters in Node.js when interacting with an API, like CoinCap's /assets endpoint, and use them in the browser, we will focus on two key concepts:
+
+Query Parameters: These are additional pieces of information sent to the server in a URL.
+Path Parameters: These are variables embedded directly into the URL path.
+
+1. Path Parameters in Node.js
+A path parameter is part of the URL that is used to identify a specific resource. For example, in the URL https://api.coincap.io/v2/assets/bitcoin, "bitcoin" is a path parameter.
+
+Node.js Example (with Express):
+You can capture path parameters in Node.js using express by specifying a dynamic part of the route using ":parameterName"
+// Define a route that accepts 'crypto' as a path parameter
+app.get('/price/:crypto', async (req, res) => {
+  const crypto = req.params.crypto.toLowerCase(); // get the 'crypto' parameter from the URL
+  const baseUrl = `https://api.coincap.io/v2/assets/${crypto}`;
+  try {
+    const response = await axios.get(baseUrl); // Make request to the CoinCap API
+    const data = response.data.data;
+    const priceUsd = data.priceUsd;
+    res.send(`<h1>The price of ${crypto} is $${priceUsd}</h1>`);
+  } catch (error) {
+    res.status(500).send('Error fetching data');
+  }
+});
+
+How to Use:
+You can open a browser and visit http://localhost:3000/price/bitcoin, http://localhost:3000/price/ethereum, etc.
+The ":crypto" part of the route is a path parameter that gets passed into the API request dynamically.
+
+2. Query Parameters in Node.js
+Query parameters are sent after the "?" symbol in a URL. They are often used to filter or modify the request.
+
+
+
+Example URL with a query parameter:
+https://api.coincap.io/v2/assets?limit=10 — limit=10 is a query parameter.
+
+Note - Everything that comes after the "?" symbol are parameters. And each parameter has a key and a value e.g "?limit=3".
+We can separate two or more parameters using the "&" symbol e.g "?from=BTC&limit=3&amount=2"
+
+Node.js Example (with Express and Query Parameters):
+You can capture query parameters in Node.js using req.query.
+
+// Route to fetch crypto prices with optional 'limit' query parameter:
+app.get('/prices', async (req, res) => {
+  const limit = req.query.limit || 5; // Default limit is 5 if not provided
+  const baseUrl = `https://api.coincap.io/v2/assets?limit=${limit}`;
+  try {
+    const response = await axios.get(baseUrl);
+    const data = response.data.data;
+    let result = '<h1>Crypto Prices</h1><ul>';
+    data.forEach((crypto) => {
+      result += `<li>${crypto.name}: $${crypto.priceUsd}</li>`;
+    });
+    result += '</ul>';
+    res.send(result);
+  } catch (error) {
+    res.status(500).send('Error fetching data');
+  }
+});
+How to Use:
+You can open a browser and visit http://localhost:3000/prices?limit=3 or http://localhost:3000/prices?limit=10.
+The ?limit=3 part is the query parameter. You can change the limit to get different numbers of cryptocurrencies.
+
+Summary:
+Path Parameters are part of the URL path (/price/bitcoin).
+Query Parameters are sent after ? in the URL (/prices?limit=10).
+In Node.js, use req.params to capture path parameters and req.query for query parameters.
+
+//Another example of Path Parameters
+app.post("/", async (req, res) => {
+    const crypto = req.body.crypto;
+    const fiat = req.body.fiat;
+    const amount = req.body.amount;
+
+    try {
+        const response = await axios.get("https://apiv2.bitcoinaverage.com/convert/global", {
+            params: {
+                from: crypto,
+                to: fiat,
+                amount: amount
+            }
+        });
+
+        const price = response.data.price;
+
+        res.send(
+            `<h1>The price of ${
+                crypto.charAt(0).toUpperCase() + crypto.slice(1)
+            } is ${price} ${fiat}</h1>`
+        );
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred while fetching the price.");
+    }
+});
+

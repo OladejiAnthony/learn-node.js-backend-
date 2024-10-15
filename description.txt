@@ -1,0 +1,25 @@
+/*Static Files in our server*/
+Inorder for our server to serve up static files such as css and images we need to create a public folder in our app where we keep both css files and images, but we have to include this code in our index.js code inorder to load the public folder in our server:
+    app.use(express.static("public"));
+
+/*mailchimp.com*/
+apiKey = 850aea713e316458b4c77d9d944021db-us11
+
+mail = oladejianthony4@gmail.com
+
+/*To deploy to Heroku server*/
+a. A new port will be given by Heroku: So use it like this -
+app.listen(process.env.PORT || 3000, (req, res) {
+    console.log("Server running on port 3000");
+})
+
+b. Deplot to Heroku
+1.Create a new file called "Procfile"
+ touch Procfile
+2. Then write this cmd inside the Procfile to tell Heroku how to launch our app -
+ "web: node app.js"
+3. Deploy to Heroku using git and heroku cmd's as shown on their documentation
+
+
+
+
