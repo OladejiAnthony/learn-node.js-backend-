@@ -1,6 +1,23 @@
 /*EJS Templating*/
 EJS - Embedded Javascript Templating.
+We will learn how to use EJS with express.
 
+ EJS is a simple templating language that lets you generate HTML markup with plain JavaScript.
 
+  -npm install ejs
+  npm i ejs
+  -Tell our app to use ejs as its view engine:
+  app.set('view engine', 'ejs');
+  -Use ejs view engine to render pages
+  app.get("/", (req, res) => {
+    res.render("index", {foo: 'Foo'})
+  })
 
+ -use ejs marker in the ui to render variables
+  <%= EJS %>!
+  - EJS Tags
+  <% 'Scriptlet' tag, for control-flow, no output
+  <%= Outputs the value into the template (HTML escaped)
+  <%- Outputs the unescaped value into the template
+  
 

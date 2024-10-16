@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <!--Learning EJS Templating-->
+    <!-- <h1>It's a <%= kindOfDay %>!</h1>    -->
+
+    <!--Use ejs view engine to render the list.ejs page-->
+    <!-- add the script tag round your javaScript codes lines "<% %>"   -->
+
+   <% if(kindOfDay === "Saturday" || kindOfDay === "Sunday") { %>
+      <h1 style="color: purple"><%= kindOfDay %> ToDo List</h1>
+      <%  } else {     %>
+      <h1 style="color: blue"><%= kindOfDay %> ToDo List</h1>
+    <% }    %>
+
+   
+  </body>
+</html>
+
+
