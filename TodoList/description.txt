@@ -16,8 +16,40 @@ We will learn how to use EJS with express.
  -use ejs marker in the ui to render variables
   <%= EJS %>!
   - EJS Tags
-  <% 'Scriptlet' tag, for control-flow, no output
+  <% 'Scriptlet' tag, for control-flow i.e if-else statements, no output
   <%= Outputs the value into the template (HTML escaped)
   <%- Outputs the unescaped value into the template
-  
+
+/*Scope in JS*/
+1. Function Scope/Local Variables
+creating a variable inside a function and can only be accessed within that function
+  function a {
+    var x = 2;
+    console.log(x);
+  }
+2. Global Scope/Variables
+creating a variable outside a function but it can be accessed either inside a function or anywhere else in your code
+    var x = 2;
+  function a {
+    console.log(x);
+  }
+  console.log(x)
+
+creating a variable inside control-loops but you can access the variable both inside and outside the control loop
+if(true) {
+  var x = 2;
+  console.log(x);
+}
+console.log(x);
+
+Variable Kerwords -
+const - its value cannot be changed 
+var - 
+let - 
+  It is in relation to scope that both var and let keywords behave slightly differently, even though their values do changes.
+  If you create a var, let or const variable inside a function, they are all local variables and can only be used inside that function.
+  But if you create any of the three variables outside a function they are all global variables and have global scope and can be accessed anywhere inside your file.
+  whe you create a variable inside a control loop(IF-ELSE, WHILE LOOP, FOR LOOP etc), the var keyword behaves as a global variable which can be accessed anywhere inside your file, but for let & const keyword they are local variables and can only be used inside the control loop.
+
+Note - try and avoid using the var keyword in your code, rather use let and const keyword more in your code.
 
