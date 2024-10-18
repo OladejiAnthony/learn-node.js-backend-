@@ -1,0 +1,24 @@
+<%- include('header') -%>
+    <div class="box" id="heading">
+        <!-- using ejs templeting -->
+        <h1>
+            <%= listTitle %>
+        </h1>
+    </div>
+    <div class="box">
+        <% for (var i=0; i < newListItems.length; i++) { %>
+            <div class="item">
+                <input type="checkbox" />
+                <p>
+                    <%= newListItems[i] %>
+                </p>
+            </div>
+            <% } %>
+
+                <form class="item" method="POST" action="/work">
+                    <input type="text" name="newItem" placeholder="New Item" autocomplete="off" />
+                    <!-- Btn Dynamic ejs templeting -->
+                    <button type="submit" name="button" value=<%=listTitle %>>+</button>
+                </form>
+    </div>
+    <%- include('footer') -%>

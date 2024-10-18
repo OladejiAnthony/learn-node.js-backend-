@@ -1,5 +1,12 @@
+#Learning Curve:
+1. appLearn.js - in the package.json file change to this "main": "appLearn.js",
+2. appList.js - in the package.json file change to this "main": "appList.js",
+3. app.js
+
+
 /*EJS Templating*/
 EJS - Embedded Javascript Templating.
+EJS lets use use templates that lets us create lots of pages that are similar to eachother. e.g a list with different items.
 We will learn how to use EJS with express.
 
  EJS is a simple templating language that lets you generate HTML markup with plain JavaScript.
@@ -52,4 +59,10 @@ let -
   whe you create a variable inside a control loop(IF-ELSE, WHILE LOOP, FOR LOOP etc), the var keyword behaves as a global variable which can be accessed anywhere inside your file, but for let & const keyword they are local variables and can only be used inside the control loop.
 
 Note - try and avoid using the var keyword in your code, rather use let and const keyword more in your code.
+
+/*EJS Layouts*/
+EJS does not specifically support blocks, but layouts cab be implemented by including headers and footers for consistentcy sake and helps reduce code duplicate:
+<%- include('header') -%>
+
+<%- include('footer') -%>
 

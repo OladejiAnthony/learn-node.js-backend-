@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 
   //pass the day variable into our list.ejs file
   //res.render("list", { kindOfDay: day});
-  res.render("todo", { kindOfDay: day, newListItems: items });
+  res.render("list", { kindOfDay: day, newListItems: items });
 });
 
 app.post("/", (req, res) => {
